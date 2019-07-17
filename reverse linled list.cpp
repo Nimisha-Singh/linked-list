@@ -1,64 +1,71 @@
-// Print a given linked list in reverse order. Tail first. You can?t change any pointer in the linked list
 #include <iostream>
-class node{
+class Node{
 public:
     int data;
-    node * next;
-    node(int data){
-        this->data=data;
-        this->next=NULL;
+    Node *next;
+    Node(int data){
+        this -> data = data;
+        this -> next = NULL;
     }
 };
+
 using namespace std;
-node* takeinput(){
+#include "Solution.h"
+
+Node* takeinput() {
     int data;
-    cin>>data;
-    node* head=NULL,*tail=NULL;
-    while(data!=-1){
-        node *newnode=new node(data);
-        if(head==NULL)                  {
-            head=newnode;
-            tail=newnode;
+    cin >> data;
+    Node* head = NULL, *tail = NULL;
+    while(data != -1){
+        Node *newNode = new Node(data);
+        if(head == NULL)                  {
+            head = newNode;
+            tail = newNode;
         }
         else{
-            tail->next=newnode;
-            tail=newnode;
+            tail -> next = newNode;
+            tail = newNode;
         }
-        cin>>data;
+        cin >> data;
     }
     return head;
 }
-void print(node *head)
-{
-    node*temp=head;
-    while(temp!=NULL)
-    {
-        cout<<temp->data<<" ";
-        temp=temp->next;
+
+void print(Node *head) {
+    Node *temp = head;
+    while(temp != NULL) {
+        cout << temp -> data << " ";
+        temp = temp -> next;
     }
     cout<<endl;
 }
-void print_linkedlist_spl(node*head)
-{
-    //write your code here
-node* temp=head;
-if(temp->next == NULL)
-{
-    cout<<temp->data<<" ";
-    return;
+int indexOfNIter(Node *head, int n) {
+    int count=0;
+    Node *temp = head;
+    while(temp!= NULL )
+    {
+        if(temp->data == n)
+            
+        {
+            return count;
+            
+        }
+        else
+        {
+            temp=temp -> next;
+            count++;
+        }
+    }
+if(temp ==NULL)
+    return -1;
 }
-    temp=temp->next;
-    print_linkedlist_spl(temp);
-    cout<<head->data<<" ";
-}
 
-
-
-int main()
-{
-    node*head=takeinput();
-    print_linkedlist_spl(head);
-    return 0;
+int main() {
+    Node *head = takeinput();
+    int n;
+    cin >> n;
+    cout << indexOfNIter(head, n);
+    
 }
 
 
