@@ -1,71 +1,62 @@
+
 #include <iostream>
-class Node{
+using namespace std;
+
+class node{
 public:
     int data;
-    Node *next;
-    Node(int data){
-        this -> data = data;
-        this -> next = NULL;
+    node * next;
+    node(int data){
+        this->data=data;
+        this->next=NULL;
     }
 };
-
-using namespace std;
-#include "Solution.h"
-
-Node* takeinput() {
+node* takeinput(){
     int data;
-    cin >> data;
-    Node* head = NULL, *tail = NULL;
-    while(data != -1){
-        Node *newNode = new Node(data);
-        if(head == NULL)                  {
-            head = newNode;
-            tail = newNode;
-        }
-        else{
-            tail -> next = newNode;
-            tail = newNode;
-        }
-        cin >> data;
-    }
-    return head;
-}
-
-void print(Node *head) {
-    Node *temp = head;
-    while(temp != NULL) {
-        cout << temp -> data << " ";
-        temp = temp -> next;
-    }
-    cout<<endl;
-}
-int indexOfNIter(Node *head, int n) {
-    int count=0;
-    Node *temp = head;
-    while(temp!= NULL )
-    {
-        if(temp->data == n)
-            
+    cin>>data;
+    node* head=NULL,*tail=NULL;
+    while(data!=-1){
+        node *newnode=new node(data);
+        if(head==NULL) 
         {
-            return count;
-            
+            head=newnode;
+            tail=newnode;
         }
         else
         {
-            temp=temp -> next;
-            count++;
+            tail->next=newnode;
+            tail=newnode;
         }
+        cin>>data;
     }
-if(temp ==NULL)
-    return -1;
+    return head;
 }
-
-int main() {
-    Node *head = takeinput();
-    int n;
-    cin >> n;
-    cout << indexOfNIter(head, n);
-    
+void print(node *head)
+{
+    node*temp=head;
+    while(temp!=NULL)
+    {
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+    cout<<endl;
 }
-
-
+node* rev_linkedlist(node* head)
+{
+    node *prev=NULL;
+    node *curr=head;
+    node *Next=head->next;
+    while(curr!=NULL && Next!=NULL)
+    {    Next=curr->next; 
+        curr->next=prev;
+        prev=curr;
+        curr=Next;
+    }
+    return prev;
+}
+int main(){
+    node* head=takeinput();
+    head=rev_linkedlist(head);
+    print(head);
+    return 0;
+}
